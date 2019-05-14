@@ -1,0 +1,6 @@
+library(leaflet)
+
+m <- leaflet() %>%
+     addTiles() 
+
+m
