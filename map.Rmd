@@ -1,6 +1,7 @@
 library(leaflet)
 
 m <- leaflet() %>%
+     setView(lng = -122.293701, lat = 47.655915, zoom = 12)
      addTiles() 
 
 m
