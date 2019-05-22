@@ -1,7 +1,37 @@
-library(leaflet)
+---
+title: "Nutria 2007"
+author: "Phu T. Van"
+date: "5/22/2019"
+output: html_document
+---
 
-m <- leaflet() %>%
-     setView(lng = -122.293701, lat = 47.655915, zoom = 12)
-     addTiles() 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(leaflet)
+library(magrittr)
+library(tidyr)
+
+```
+
+```{r preprocess}
+  obs <- read.csv("nutria_obs.csv")
+
+  sightings <- read.csv("sighting_log.csv", header=FALSE)
+  colnames(sightings) <- c("date", "sightings")
+
+```
+
+```{r UBNAmap}
+
+m <- leaflet(data = obs) %>%
+     setView(lng = -122.293701, lat = 47.655915, zoom = 9) %>%
+     addTiles() %>%
+     addCircleMarkers(~longitude, ~latitude
+                      , radius = ~ifelse(type == "sighting", 3, 4)
+                      , color = ~ifelse(type == "sighting", "red", "blue")
+                      , stroke = FALSE
+                      , fillOpacity = 0.5) 
+     # addMarkers(~longitude, ~latitude)
 
 m
+```
