@@ -1,6 +1,6 @@
 ---
 title: "Nutria 2007"
-author: "Phu T. Van"
+author: "Phu T. Van & Filip Tkaczyk"
 date: "5/22/2019"
 output: html_document
 ---
@@ -25,7 +25,7 @@ library(tidyr)
 
 m <- leaflet(data = obs) %>%
      setView(lng = -122.293701, lat = 47.655915, zoom = 9) %>%
-     addTiles() %>%
+     addProviderTiles(providers$OpenTopoMap) %>%
      addCircleMarkers(~longitude, ~latitude
                       , radius = ~ifelse(type == "sighting", 3, 4)
                       , color = ~ifelse(type == "sighting", "red", "blue")
